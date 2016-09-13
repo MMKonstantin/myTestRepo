@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Home page</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Home page" footer="Copyright by Rusev">
+			<div>
+				<p:graphicImage value="/resources/images/duke.jpg" />
+			</div>
+			<br />
+			<br />
+			<div style="margin-bottom: 10px">
+				<p:outputLabel value="Welcome to my Java Server Faces Application! " />
+				<p:outputLabel value="Please Register or Login here!" />
+			</div>
+			<br />
+			<div>
+				<p:commandButton value="Registration" action="registration" />
+				<p:commandButton value="Login" action="login" />
+			</div>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>User Information</title>
+</h:head>
+<h:body>
+	<h:form id="userInformation">
+		<p:panel header="User Information" footer="Copyright by Rusev">
+			<p:dataTable var="user" value="#{userInfoBean.userInfo}">
+				<p:column headerText="User ID">
+					<h:outputText value="#{user.id}" />
+				</p:column>
+
+				<p:column headerText="E-mail">
+					<h:outputText value="#{user.email}" />
+				</p:column>
+
+				<p:column headerText="First Name">
+					<h:outputText value="#{user.firstName}" />
+				</p:column>
+
+				<p:column headerText="Last Name">
+					<h:outputText value="#{user.lastName}" />
+				</p:column>
+
+				<p:column headerText="Gender">
+					<h:outputText value="#{user.gender}" />
+				</p:column>
+
+				<p:column headerText="Birthdate">
+					<h:outputText value="#{user.birthdate}" />
+				</p:column>
+
+				<p:column headerText="Group">
+					<ui:repeat value="#{user.groups}" var="group" varStatus="status">
+						<h:outputText value="#{group.groupName}#{status.last ? '' : ', '}" />
+					</ui:repeat>
+				</p:column>
+
+				<p:column headerText="Number of Groups">
+					<h:outputText value="#{user.groups.size()}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

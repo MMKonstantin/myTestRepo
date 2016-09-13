@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Registration Form</title>
+</h:head>
+<h:body>
+	<h:form id="registrationForm">
+		<p:panel header="Registration Form" footer="Copyright by Rusev">
+			<p:messages id="messages" autoUpdate="true" />
+			<h:panelGrid id="panel" columns="2" cellspacing="5" cellpadding="5"
+				style="margin-bottom:10px">
+				<p:outputLabel for="email" value="E-mail: " />
+				<p:inputText id="email" value="#{registrationBean.email}"
+					required="true"
+					requiredMessage="Please insert your e-mail address!"
+					validatorMessage="Invalid e-mail format! Please try again!">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:outputLabel for="password" value="Password: " />
+				<p:password id="password" value="#{registrationBean.password}"
+					feedback="true" label="Password" required="true"
+					match="confirmPassword"
+					requiredMessage="Please insert your password!"
+					validatorMessage="Password is from 6 to 20 characters, at least one digit, one lowercase and one uppercase letter OR Passwords do not match!">
+					<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+				</p:password>
+				<p:outputLabel for="confirmPassword" value="Confirm Password: " />
+				<p:password id="confirmPassword"
+					value="#{registrationBean.confirmPassword}" feedback="false"
+					required="true" label="Confirm Password"
+					requiredMessage="Please confirm your password!" />
+				<p:outputLabel for="firstname" value="First Name: " />
+				<p:inputText id="firstname" value="#{registrationBean.firstName}"
+					required="true" requiredMessage="Please, insert your first name!" />
+				<p:outputLabel for="lastname" value="Last Name: " />
+				<p:inputText id="lastname" value="#{registrationBean.lastName}"
+					required="true" requiredMessage="Please, insert your last name!" />
+				<p:outputLabel for="gender" value="Gender: " />
+				<p:selectOneMenu id="gender" value="#{registrationBean.gender}"
+					required="true" requiredMessage="Please, choose your gender!">
+					<f:selectItem itemLabel="Choose your gender.." itemValue="#{null}" />
+					<f:selectItem itemLabel="Male" itemValue="M" />
+					<f:selectItem itemLabel="Female" itemValue="F" />
+				</p:selectOneMenu>
+				<p:outputLabel for="birthDate" value="Birthdate: " />
+				<p:calendar id="birthDate" value="#{registrationBean.birthDate}"
+					pattern="dd MMM, yyyy" required="true"
+					requiredMessage="Please, insert your birthdate!" />
+				<p:outputLabel for="terms" value="Accept all terms: " />
+				<p:selectBooleanCheckbox id="terms"
+					value="#{registrationBean.allTerms}">
+					<p:ajax update="registrationButton" />
+				</p:selectBooleanCheckbox>
+				<p:outputLabel value="* is equivalent to Required Field!" />
+				<p:outputLabel value="#{null}" />
+				<p:commandButton id="registrationButton" value="Registration"
+					action="#{registrationBean.login}"
+					disabled="#{registrationBean.allTerms eq false}" />
+				<p:commandButton value="Reset"
+					actionListener="#{registrationBean.reset}"
+					update="registrationForm:panel" immediate="true" process="@this" />
+				<p:commandButton value="Back"
+					action="/index.xhtml?faces-redirect=true" immediate="true" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

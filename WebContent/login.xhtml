@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login Form</title>
+</h:head>
+<h:body>
+	<h:form id="loginForm">
+		<p:panel header="Login Form" footer="Copyright by Rusev">
+			<p:messages id="messages" autoUpdate="true" />
+			<h:panelGrid columns="2" cellspacing="5" cellpadding="5"
+				style="margin-bottom:10px">
+				<p:outputLabel for="email" value="E-mail: " />
+				<p:inputText id="email" value="#{loginBean.userEmail}"
+					required="true"
+					requiredMessage="Please insert your e-mail address!"
+					validatorMessage="Invalid e-mail format! Please try again!">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:outputLabel for="password" value="Password: " />
+				<p:password id="password" redisplay="false"
+					value="#{loginBean.password}" required="true"
+					requiredMessage="Please insert your password!" />
+				<p:commandButton id="loginButton" value="Login"
+					action="#{loginBean.login}" />
+				<p:commandButton value="Reset" actionListener="#{loginBean.reset}"
+					update="loginForm" immediate="true" process="@none">
+				</p:commandButton>
+				<p:commandButton value="Back"
+					action="/index.xhtml?faces-redirect=true" immediate="true" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
